@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reference_app/src/components/app_colors.dart';
+import 'package:reference_app/src/core/view/my_home_page.dart';
 
 class MyMaterials extends StatelessWidget {
   const MyMaterials({
@@ -19,21 +20,14 @@ class MyMaterials extends StatelessWidget {
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       key: const Key("Llave del MaterialApp"),
-
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("TITULO",style: myTextThemes().titleLarge,),
-        ),
-        body: Center(
-          child: Text('Hello World!',style: myTextThemes().bodySmall),
-        ),
-      ),
+      home: MyHomePage(),
     );
   }
 
 
 
 
+///[Temas de los widgets]
 
   ThemeData myAppThemes() {
     return ThemeData(
@@ -56,11 +50,412 @@ class MyMaterials extends StatelessWidget {
       dataTableTheme: myDataTableThemes(),
       datePickerTheme: myDatePickerThemes(),
       inputDecorationTheme: myInputDecorationThemes(),
-      
-      
-      
+      disabledColor: AppColors.highlight,
+      dividerColor: AppColors.backgroundWidget,
+      dividerTheme: myDividerThemes(),
+      drawerTheme: myDrawerThemes(),
+      dropdownMenuTheme: myDropdownMenuThemes(),
+      elevatedButtonTheme: myElevatedButtonThemes(),
+      filledButtonTheme: myFilledButtonThemes(),
+      floatingActionButtonTheme: myFloatingActionButtonThemes(),
+      focusColor: AppColors.highlight,
+      fontFamily: "Monocraft",
+      highlightColor: AppColors.highlight,
+      hintColor: AppColors.backgroundWidget,
+      hoverColor: AppColors.backgroundComponent,
+      indicatorColor: AppColors.primary,
+      iconButtonTheme: myIconButtonThemes(),
+      iconTheme: myIconThemes(),
+      navigationBarTheme: myNavigationBarThemes(),
+      navigationDrawerTheme: myNavigationDrawerThemes(),
+      expansionTileTheme: myExpansionTileThemes(),
+      listTileTheme: myListTileThemes(),
+      unselectedWidgetColor: AppColors.background,
+      splashColor: AppColors.accent,
+      primaryColor: AppColors.primary,
+      primaryColorDark: AppColors.primary,
+      primaryColorLight: AppColors.primary,
+      scaffoldBackgroundColor: AppColors.secondary,
+      shadowColor: AppColors.background,
+      tooltipTheme: myTooltipThemes(),
+      navigationRailTheme: myNavigationRailThemes(),
+      outlinedButtonTheme: myOutlinedButtonThemes(),
+      popupMenuTheme: myPopupMenuThemes(),
+      primaryIconTheme: myIconThemes(),
+      primaryTextTheme: myTextThemes(),
+      progressIndicatorTheme: myProgressIndicatorThemes(),
+      radioTheme: myRadioThemes(),
+      secondaryHeaderColor: AppColors.background,
+      scrollbarTheme: myScrollbarThemes(),
+      searchViewTheme: mySearchViewThemes(),
+      segmentedButtonTheme: mySegmentedButtonThemes(),
+      sliderTheme: mySliderThemes(),
+      snackBarTheme: mySnackBarThemes(),
+      switchTheme: mySwitchThemes(),
+      textButtonTheme: myTextButtonThemes(),
+      textSelectionTheme: myTextSelectionThemes(),
+      timePickerTheme: myTimePickerThemes(),
+      toggleButtonsTheme: myToggleButtonThemes(),
       );
   }
+
+
+
+
+
+  ToggleButtonsThemeData myToggleButtonThemes() => ToggleButtonsThemeData(
+    borderColor: AppColors.background,
+    borderRadius: BorderRadius.circular(4),
+    borderWidth: 20,
+    color: AppColors.backgroundWidget,
+    disabledBorderColor: AppColors.background,
+    disabledColor: AppColors.background,
+    fillColor: AppColors.secondary,
+    focusColor: AppColors.highlight,
+    highlightColor: AppColors.highlight,
+    hoverColor: AppColors.backgroundComponent,
+    selectedBorderColor: AppColors.backgroundWidget,
+    selectedColor: AppColors.primary,
+    splashColor: AppColors.accent,
+    textStyle: myTextStyles()
+  );
+
+
+
+
+  TimePickerThemeData myTimePickerThemes() => TimePickerThemeData(
+    backgroundColor: AppColors.secondary,
+    dayPeriodColor: AppColors.accent,
+    dayPeriodTextColor: AppColors.backgroundWidget,
+    dialHandColor: AppColors.highlight,
+    dayPeriodTextStyle: myTextStyles(),
+    dialBackgroundColor: AppColors.background,
+    dialTextColor: AppColors.backgroundComponent,
+    dialTextStyle: myTextStyles(),
+    elevation: 30,
+    entryModeIconColor: AppColors.backgroundWidget,
+    hourMinuteColor: AppColors.primary,
+    helpTextStyle: myTextStyles(),
+    hourMinuteTextColor: AppColors.accent,
+    hourMinuteTextStyle: myTextStyles(),
+    hourMinuteShape: StadiumBorder(),
+    shape: StadiumBorder(),
+  );
+
+
+
+  TextSelectionThemeData myTextSelectionThemes() => TextSelectionThemeData(
+    cursorColor: AppColors.backgroundComponent,
+    selectionColor: AppColors.backgroundWidget,
+    selectionHandleColor: AppColors.highlight
+  );
+
+  TextButtonThemeData myTextButtonThemes() => TextButtonThemeData(
+    style: ButtonStyle(
+      enableFeedback: true
+    )
+  );
+
+
+
+  SwitchThemeData mySwitchThemes() => SwitchThemeData(
+    padding: EdgeInsets.all(8),
+    splashRadius: 20,
+  );
+
+
+
+  SnackBarThemeData mySnackBarThemes() => SnackBarThemeData(
+    actionBackgroundColor: AppColors.secondary,
+    actionTextColor: AppColors.accent,
+    backgroundColor: AppColors.backgroundWidget,
+    closeIconColor: AppColors.highlight,
+    contentTextStyle: myTextStyles(),
+    disabledActionBackgroundColor: AppColors.background,
+    disabledActionTextColor: AppColors.background,
+    elevation: 20,
+    insetPadding: EdgeInsets.all(8),
+    shape: StadiumBorder(),
+    showCloseIcon: true,
+  );
+
+
+
+  SliderThemeData mySliderThemes() => SliderThemeData(
+    activeTickMarkColor: AppColors.accent,
+    activeTrackColor: AppColors.highlight,
+    disabledActiveTickMarkColor: AppColors.background,
+    disabledActiveTrackColor: AppColors.background,
+    disabledInactiveTickMarkColor: AppColors.background,
+    disabledInactiveTrackColor: AppColors.background,
+    disabledSecondaryActiveTrackColor: AppColors.background,
+    disabledThumbColor: AppColors.background,
+    inactiveTickMarkColor: AppColors.background,
+    inactiveTrackColor: AppColors.background,
+    minThumbSeparation: 30,
+    overlappingShapeStrokeColor: AppColors.accent,
+    overlayColor: AppColors.backgroundWidget,
+    padding: EdgeInsets.all(8),
+    secondaryActiveTrackColor: AppColors.highlight,
+    thumbColor: AppColors.primary,
+    trackGap: 20,
+    trackHeight: 20,
+    valueIndicatorColor: AppColors.backgroundComponent,
+    valueIndicatorTextStyle: myTextStyles(),
+    valueIndicatorStrokeColor: AppColors.backgroundWidget
+  );
+
+
+
+
+  SegmentedButtonThemeData mySegmentedButtonThemes() => SegmentedButtonThemeData(
+    style: ButtonStyle(
+      enableFeedback: true
+    )
+  );
+
+
+
+  SearchViewThemeData mySearchViewThemes() => SearchViewThemeData(
+    backgroundColor: AppColors.background,
+    barPadding: EdgeInsets.all(8),
+    dividerColor: AppColors.backgroundWidget,
+    elevation: 20,
+    headerHeight: 30,
+    headerHintStyle: myTextStyles(),
+    headerTextStyle: myTextStyles(),
+    padding: EdgeInsets.all(8),
+    shape: CircleBorder(),
+    shrinkWrap: true,
+    side: BorderSide(),
+    surfaceTintColor: AppColors.accent
+  );
+
+
+
+  ScrollbarThemeData myScrollbarThemes() => ScrollbarThemeData(
+    crossAxisMargin: 20,
+    interactive: true,
+    mainAxisMargin: 20,
+    minThumbLength: 20,
+    radius: Radius.circular(5),
+  );
+
+
+
+
+  RadioThemeData myRadioThemes() => RadioThemeData(
+    splashRadius: 30
+  );
+
+
+
+  ProgressIndicatorThemeData myProgressIndicatorThemes() => ProgressIndicatorThemeData(
+    borderRadius: BorderRadius.all(Radius.circular(10)),
+    circularTrackColor: AppColors.accent,
+    circularTrackPadding: EdgeInsets.all(8),
+    color: AppColors.highlight,
+    linearMinHeight: 30,
+    linearTrackColor: AppColors.backgroundWidget,
+    refreshBackgroundColor: AppColors.background,
+    stopIndicatorColor: AppColors.primary,
+    stopIndicatorRadius: 20,
+    strokeAlign: 30,
+    strokeWidth: 30,
+    trackGap: 20,
+  );
+
+
+
+
+  PopupMenuThemeData myPopupMenuThemes() => PopupMenuThemeData(
+    color: AppColors.secondary,
+    elevation: 30,
+    enableFeedback: true,
+    iconColor: AppColors.backgroundWidget,
+    iconSize: 30,
+    menuPadding: EdgeInsets.all(8),
+    shadowColor: AppColors.accent,
+    shape: StadiumBorder(),
+    surfaceTintColor: AppColors.backgroundComponent,
+    textStyle: myTextStyles(),
+  );
+
+
+
+  OutlinedButtonThemeData myOutlinedButtonThemes() => OutlinedButtonThemeData(
+    style: ButtonStyle(
+      enableFeedback: true
+    )
+  );
+
+
+
+  NavigationRailThemeData myNavigationRailThemes() => NavigationRailThemeData(
+    backgroundColor: AppColors.backgroundWidget,
+    elevation: 30,
+    groupAlignment: 20,
+    indicatorColor: AppColors.highlight,
+    indicatorShape: StadiumBorder(),
+    minExtendedWidth: 20,
+    minWidth: 10,
+    selectedIconTheme: myIconThemes(),
+    selectedLabelTextStyle: myTextStyles(),
+    unselectedLabelTextStyle: myTextStyles(),
+    unselectedIconTheme: myIconThemes(),
+    useIndicator: true
+  );
+
+
+
+  TooltipThemeData myTooltipThemes() => TooltipThemeData(
+    enableFeedback: true,
+    excludeFromSemantics: true,
+    height: 20,
+    margin: EdgeInsets.all(12),
+    preferBelow: true,
+    verticalOffset: 10,
+    textStyle: myTextStyles(),
+  );
+
+
+
+  ListTileThemeData myListTileThemes() => ListTileThemeData(
+    dense: true,
+    enableFeedback: true,
+    horizontalTitleGap: 30,
+    contentPadding: EdgeInsets.all(8),
+    iconColor: AppColors.highlight,
+    minLeadingWidth: 30,
+    minVerticalPadding: 30,
+    minTileHeight: 30,
+    selectedColor: AppColors.backgroundWidget,
+    selectedTileColor: AppColors.accent,
+    shape: Border.all(),
+    subtitleTextStyle: myTextStyles(),
+    textColor: AppColors.background,
+    tileColor: AppColors.background,
+    titleTextStyle: myTextStyles(),
+  );
+
+
+
+  ExpansionTileThemeData myExpansionTileThemes() => ExpansionTileThemeData(
+    backgroundColor: AppColors.secondary,
+    collapsedBackgroundColor: AppColors.backgroundWidget,
+    collapsedShape: BeveledRectangleBorder(),
+    collapsedIconColor: AppColors.accent,
+    iconColor: AppColors.backgroundComponent,
+    childrenPadding: EdgeInsets.all(8),
+    collapsedTextColor: AppColors.background,
+    shape: LinearBorder.end(),
+    textColor: AppColors.background,
+    tilePadding: EdgeInsets.all(8)
+  );
+
+
+
+  NavigationDrawerThemeData myNavigationDrawerThemes() => NavigationDrawerThemeData(
+    backgroundColor: AppColors.secondary,
+    elevation: 30,
+    indicatorColor: AppColors.highlight,
+    indicatorShape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(5)),
+    shadowColor: AppColors.backgroundWidget,
+    surfaceTintColor: AppColors.primary,
+    tileHeight: 20
+  );
+
+
+
+  NavigationBarThemeData myNavigationBarThemes() => NavigationBarThemeData(
+    backgroundColor: AppColors.secondary,
+    elevation: 20,
+    height: 50,
+    indicatorColor: AppColors.highlight,
+    indicatorShape: StadiumBorder(),
+    labelPadding: EdgeInsets.all(8),
+    shadowColor: AppColors.backgroundWidget,
+    surfaceTintColor: AppColors.backgroundComponent
+  );
+
+
+
+
+  IconButtonThemeData myIconButtonThemes() => IconButtonThemeData(
+    style: ButtonStyle(
+      enableFeedback: true
+    )
+  );
+
+
+
+  FloatingActionButtonThemeData myFloatingActionButtonThemes() => FloatingActionButtonThemeData(
+    backgroundColor: AppColors.secondary,
+    elevation: 20,
+    disabledElevation: 10,
+    enableFeedback: true,
+    extendedIconLabelSpacing: 10,
+    extendedPadding: EdgeInsets.all(8),
+    extendedTextStyle: myTextStyles(),
+    focusColor: AppColors.highlight,
+    focusElevation: 40,
+    foregroundColor: AppColors.primary,
+    highlightElevation: 20,
+    hoverColor: AppColors.backgroundWidget,
+    hoverElevation: 30,
+    iconSize: 30,
+    shape: StadiumBorder(),
+    splashColor: AppColors.backgroundComponent
+  );
+
+
+
+  FilledButtonThemeData myFilledButtonThemes() => FilledButtonThemeData(
+    style: ButtonStyle(
+      enableFeedback: true,
+    )
+  );
+
+
+
+  ElevatedButtonThemeData myElevatedButtonThemes() => ElevatedButtonThemeData(
+    style: ButtonStyle(
+      enableFeedback: true,
+    )
+  );
+
+
+
+  DropdownMenuThemeData myDropdownMenuThemes() => DropdownMenuThemeData(
+    inputDecorationTheme: myInputDecorationThemes(),
+    textStyle: myTextStyles()
+  );
+
+
+
+
+  DrawerThemeData myDrawerThemes() => DrawerThemeData(
+    backgroundColor: AppColors.secondary,
+    elevation: 20,
+    endShape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(5)),
+    scrimColor: AppColors.secondary,
+    shadowColor: AppColors.backgroundWidget,
+    shape: BeveledRectangleBorder(),
+    surfaceTintColor: AppColors.backgroundComponent,
+    width: 70,
+  );
+
+
+
+
+  DividerThemeData myDividerThemes() => DividerThemeData(
+    color: AppColors.secondary,
+    endIndent: 20,
+    indent: 20,
+    space: 20,
+    thickness: 10
+  );
+
 
 
 
@@ -83,6 +478,19 @@ class MyMaterials extends StatelessWidget {
         ),
         hoverColor: AppColors.accent,
         outlineBorder: BorderSide(),
+        isCollapsed: true,
+        filled: true,
+        suffixStyle: myTextStyles(),
+        floatingLabelStyle: myTextStyles(),
+        focusColor: AppColors.highlight,
+        fillColor: AppColors.backgroundWidget,
+        counterStyle: myTextStyles(),
+        alignLabelWithHint: true,
+        iconColor: AppColors.highlight,
+        isDense: true,
+        prefixIconColor: AppColors.backgroundWidget,
+        errorMaxLines: 2,
+        suffixIconColor: AppColors.accent,
       );
 
 
@@ -90,7 +498,6 @@ class MyMaterials extends StatelessWidget {
 
 
   DatePickerThemeData myDatePickerThemes() => DatePickerThemeData(
-
       backgroundColor: AppColors.primary,
       surfaceTintColor: AppColors.backgroundWidget,
       headerBackgroundColor: AppColors.secondary,
@@ -310,7 +717,7 @@ class MyMaterials extends StatelessWidget {
   TextStyle myTextStyles() {
     return TextStyle(
       backgroundColor: AppColors.backgroundComponent,
-      color: AppColors.secondary,
+      color: AppColors.darkText,
       //decoration: TextDecoration.underline,
       decorationColor: AppColors.accent,
       decorationThickness: 4,
@@ -333,7 +740,7 @@ class MyMaterials extends StatelessWidget {
   IconThemeData myIconThemes() {
     return IconThemeData(
       applyTextScaling: true,
-      color: AppColors.highlight,
+      color: AppColors.secondary,
       opacity: 0.8,
       size: 23,
       weight: 300,
