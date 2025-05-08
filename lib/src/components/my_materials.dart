@@ -310,30 +310,30 @@ class MyMaterials extends StatelessWidget {
 
   TooltipThemeData myTooltipThemes() => TooltipThemeData(
     enableFeedback: true,
-    excludeFromSemantics: true,
+    excludeFromSemantics: false,
     height: 20,
     margin: EdgeInsets.all(12),
-    preferBelow: true,
+    preferBelow: false,
     verticalOffset: 10,
-    textStyle: myTextStyles(),
+    textStyle: myTextStyles().copyWith(fontSize: 16),
   );
 
 
 
   ListTileThemeData myListTileThemes() => ListTileThemeData(
-    dense: true,
-    enableFeedback: true,
+    dense: false,
+    enableFeedback: false,
     horizontalTitleGap: 30,
     contentPadding: EdgeInsets.all(8),
     iconColor: AppColors.highlight,
     minLeadingWidth: 30,
-    minVerticalPadding: 30,
+    minVerticalPadding: 35,
     minTileHeight: 30,
     selectedColor: AppColors.backgroundWidget,
     selectedTileColor: AppColors.accent,
-    shape: Border.all(),
+    shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(2)),
     subtitleTextStyle: myTextStyles(),
-    textColor: AppColors.background,
+    textColor: AppColors.background, //Se camufla y solo es visible al presionar
     tileColor: AppColors.background,
     titleTextStyle: myTextStyles(),
   );
@@ -383,14 +383,14 @@ class MyMaterials extends StatelessWidget {
 
   IconButtonThemeData myIconButtonThemes() => IconButtonThemeData(
     style: ButtonStyle(
-      enableFeedback: true
+      enableFeedback: true,
     )
   );
 
 
 
   FloatingActionButtonThemeData myFloatingActionButtonThemes() => FloatingActionButtonThemeData(
-    backgroundColor: AppColors.secondary,
+    backgroundColor: AppColors.background,
     elevation: 20,
     disabledElevation: 10,
     enableFeedback: true,
@@ -419,10 +419,10 @@ class MyMaterials extends StatelessWidget {
 
 
   ElevatedButtonThemeData myElevatedButtonThemes() => ElevatedButtonThemeData(
-    style: ButtonStyle(
-      enableFeedback: true,
-    )
-  );
+      style: ButtonStyle(
+        enableFeedback: true,
+      )
+    );
 
 
 
@@ -438,11 +438,11 @@ class MyMaterials extends StatelessWidget {
     backgroundColor: AppColors.secondary,
     elevation: 20,
     endShape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(5)),
-    scrimColor: AppColors.secondary,
-    shadowColor: AppColors.backgroundWidget,
+    scrimColor: Color.fromARGB(155, 0, 0, 0),
+    shadowColor: AppColors.primary,
     shape: BeveledRectangleBorder(),
     surfaceTintColor: AppColors.backgroundComponent,
-    width: 70,
+    width: 300,
   );
 
 
@@ -695,18 +695,18 @@ class MyMaterials extends StatelessWidget {
   AppBarTheme myAppBarThemes() {
     return AppBarTheme(
       color: AppColors.primary,
-      actionsPadding: EdgeInsets.only(top: 8,bottom: 8,left: 16,right: 16),
+      //actionsPadding: EdgeInsets.only(top: 8,bottom: 8,left: 16,right: 16),
       centerTitle: true,
       elevation: 16,
       foregroundColor: AppColors.backgroundComponent,
       iconTheme: myIconThemes(),
-      shadowColor: AppColors.backgroundComponent,
+      shadowColor: AppColors.darkText,
       shape: Border.all(),
       surfaceTintColor: AppColors.backgroundWidget,
       titleSpacing: 16,
       scrolledUnderElevation: 16,
       titleTextStyle: myTextStyles(),
-      toolbarHeight: 40,
+      toolbarHeight: 48,
       toolbarTextStyle: myTextStyles());
   }
 
@@ -716,7 +716,7 @@ class MyMaterials extends StatelessWidget {
 
   TextStyle myTextStyles() {
     return TextStyle(
-      backgroundColor: AppColors.backgroundComponent,
+      //backgroundColor: AppColors.backgroundComponent,
       color: AppColors.darkText,
       //decoration: TextDecoration.underline,
       decorationColor: AppColors.accent,
@@ -739,12 +739,12 @@ class MyMaterials extends StatelessWidget {
 
   IconThemeData myIconThemes() {
     return IconThemeData(
-      applyTextScaling: true,
+      //applyTextScaling: true,
       color: AppColors.secondary,
-      opacity: 0.8,
-      size: 23,
-      weight: 300,
-      opticalSize: 23,
+      opacity: 1,
+      //size: 23,
+      //weight: 300,
+      //opticalSize: 23,
     );
   }
 }
