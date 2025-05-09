@@ -11,15 +11,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  void _navigateToReasonScreen(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ReasonScreen())); 
+  void _navigateToReasonScreen(BuildContext context,Widget Function() screenBuilder) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => screenBuilder())); 
   }
 
-  void _navigateToReasonScreen2(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ReasonScreen2()));
-  }
 
-  
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 1',style: Theme.of(context).textTheme.titleLarge,),
                 onTap: () {
-                  _navigateToReasonScreen(context);
+                  _navigateToReasonScreen(context,() => ReasonScreen(),);
                 },
               ),
               ListTile(
@@ -50,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 2',style: Theme.of(context).textTheme.titleLarge,),
                 onTap: () {
-                  _navigateToReasonScreen2(context);
+                  _navigateToReasonScreen(context,() => ReasonScreen2(),);
                 },
               ),
               ListTile(
@@ -58,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 3',style: Theme.of(context).textTheme.titleLarge,),
                 onTap: () {
-                  _navigateToReasonScreen(context);
+                  _navigateToReasonScreen(context,() => ReasonScreen3(),);
                 },
               ),
               ListTile(
@@ -66,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 4',style: Theme.of(context).textTheme.titleLarge,),
                 onTap: () {
-                  _navigateToReasonScreen(context);
+                  _navigateToReasonScreen(context,() => ReasonScreen4(),);
                 },
               ),
               ListTile(
@@ -74,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 5',style: Theme.of(context).textTheme.titleLarge,),
                 onTap: () {
-                  _navigateToReasonScreen(context);
+                  _navigateToReasonScreen(context,() => ReasonScreen5(),);
                 },
               ),
               ListTile(
@@ -82,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 6',style: Theme.of(context).textTheme.titleLarge,),
                 onTap: () {
-                  _navigateToReasonScreen(context);
+                  _navigateToReasonScreen(context,() => ReasonScreen6(),);
                 },
               ),
               ListTile(
@@ -90,13 +86,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 7',style: Theme.of(context).textTheme.titleLarge,),
                 onTap: () {
-                  _navigateToReasonScreen(context);
+                  _navigateToReasonScreen(context,() => ReasonScreen7(),);
                 },
               ),
               ListTile(
                 title: Text('Extra'),
                 onTap: () {
-                  _navigateToReasonScreen(context);
+                  _navigateToReasonScreen(context,() => ReasonScreenExtra(),);
                 },
               ),
             ],
@@ -130,80 +126,16 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Row(
                 children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 32,right: 16,left: 32,bottom: 32),
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(32),color: AppColors.background),
-                        clipBehavior: Clip.antiAlias,
-                        height: 256,
-                        width: 192,
-                        child: Transform.scale(
-                          scale: 2.0,
-                          child: Image.asset(
-                            "assets/images/poncho.jpg",
-                            fit: BoxFit.fill,)),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 32,left: 16,right: 32,bottom: 32),
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(32),color: AppColors.background),
-                        clipBehavior: Clip.antiAlias,
-                        height: 256,
-                        width: 192,
-                        child: Transform.scale(
-                          scale: 2.0,
-                          child: Image.asset(
-                            "assets/images/poncha_candy.jpg",
-                            fit: BoxFit.fill,)), 
-                      ),
-                    ),
-                  )
+                  FourContainers(imagePath: "assets/images/poncho.jpg",),
+                  FourContainers(imagePath: "assets/images/poncha_candy.jpg",),
                 ],
               ),
               Row(
                 children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 32,right: 16,left: 32,bottom: 32),
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(32),color: AppColors.background),
-                        clipBehavior: Clip.antiAlias,
-                        height: 256,
-                        width: 192,
-                        child: Transform.scale(
-                          scale: 2.0,
-                          child: Image.asset(
-                            "assets/images/poncha_ambar.jpg",
-                            fit: BoxFit.fill,)),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 32,left: 16,right: 32,bottom: 32),
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(32),color: AppColors.background),
-                        clipBehavior: Clip.antiAlias,
-                        height: 256,
-                        width: 192,
-                        child: Transform.scale(
-                          scale: 2.0,
-                          child: Image.asset(
-                            "assets/images/ponchitos.jpg",
-                            fit: BoxFit.fill,)),
-                      ),
-                    ),
-                  )
+                  FourContainers(imagePath: "assets/images/poncha_ambar.jpg",),
+                  FourContainers(imagePath: "assets/images/ponchitos.jpg",),
                 ],
-              ),
+              )
             ],
           ),
         ),
@@ -229,6 +161,35 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.only(top: 20),
             child: Text("CON AMOR DE JUAN",textAlign: TextAlign.center,style: Theme.of(context).textTheme.titleMedium,),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class FourContainers extends StatelessWidget {
+  final String imagePath;
+  const FourContainers({
+    super.key,
+    required this.imagePath,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 32,right: 16,left: 32,bottom: 32),
+        child: Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(32),color: AppColors.background),
+          clipBehavior: Clip.antiAlias,
+          height: 256,
+          width: 192,
+          child: Transform.scale(
+            scale: 2.0,
+            child: Image.asset(
+              imagePath,
+              fit: BoxFit.fill,)),
         ),
       ),
     );
