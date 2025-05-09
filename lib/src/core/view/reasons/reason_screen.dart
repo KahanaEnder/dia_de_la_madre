@@ -67,7 +67,7 @@ class ReasonScreen2 extends StatelessWidget { ///[Pantalla 2]
     return const ReasonWidget(
       title: "SEGUNDO",
       message: "Yo no dejare de amarte mami y quiero que siempre estes a mi lado porque tu compañia es mi felicidad <3",
-      messagePath: "assets/images/a (2).jpg",); //Implementar poder cambiar valores
+      messagePath: "assets/images/a (2).jpg",); 
   }
 }
 
@@ -78,8 +78,8 @@ class ReasonScreen3 extends StatelessWidget { ///[Pantalla 3]
   Widget build(BuildContext context) {
     return const ReasonWidget(
       title: "TERCERO",
-      message: "Yo no dejare de amarte mami y quiero que siempre estes a mi lado porque tu compañia es mi felicidad <3",
-      messagePath: "assets/images/a (3).jpg",); //Implementar poder cambiar valores
+      message: "Me apoyas en todo y valoro muchisimo eso, sé que siempre puedo contar contigo para lo que necesite",
+      messagePath: "assets/images/a (3).jpg",); 
   }
 }
 
@@ -90,8 +90,8 @@ class ReasonScreen4 extends StatelessWidget { ///[Pantalla 4]
   Widget build(BuildContext context) {
     return const ReasonWidget(
       title: "CUARTO",
-      message: "Yo no dejare de amarte mami y quiero que siempre estes a mi lado porque tu compañia es mi felicidad <3",
-      messagePath: "assets/images/a (4).jpg",); //Implementar poder cambiar valores
+      message: "Amas mucho a los ponchos y tienen una excelente mamá que se preocupa y cuida de ellos",
+      messagePath: "assets/images/a (4).jpg",); 
   }
 }
 
@@ -102,8 +102,8 @@ class ReasonScreen5 extends StatelessWidget { ///[Pantalla 5]
   Widget build(BuildContext context) {
     return const ReasonWidget(
       title: "QUINTO",
-      message: "Yo no dejare de amarte mami y quiero que siempre estes a mi lado porque tu compañia es mi felicidad <3",
-      messagePath: "assets/images/a (5).jpg",); //Implementar poder cambiar valores
+      message: "Has sido receptiva y escuchas lo que te digo siempre porque tienes ambiciones y vas centrada en querer ser mejor",
+      messagePath: "assets/images/a (5).jpg",); 
   }
 }
 
@@ -114,8 +114,8 @@ class ReasonScreen6 extends StatelessWidget { ///[Pantalla 6]
   Widget build(BuildContext context) {
     return const ReasonWidget(
       title: "SEXTO",
-      message: "Yo no dejare de amarte mami y quiero que siempre estes a mi lado porque tu compañia es mi felicidad <3",
-      messagePath: "assets/images/a (6).jpg",); //Implementar poder cambiar valores
+      message: "Por lo fuerte y berraca que eres, una cualidad que te ha logrado salir adelante",
+      messagePath: "assets/images/a (6).jpg",); 
   }
 }
 
@@ -126,8 +126,8 @@ class ReasonScreen7 extends StatelessWidget { ///[Pantalla 7]
   Widget build(BuildContext context) {
     return const ReasonWidget(
       title: "SEPTIMO",
-      message: "Yo no dejare de amarte mami y quiero que siempre estes a mi lado porque tu compañia es mi felicidad <3",
-      messagePath: "assets/images/a (7).jpg",); //Implementar poder cambiar valores
+      message: "Porque siempre has estado presente y has querido lo mejor para mi",
+      messagePath: "assets/images/a (7).jpg",); 
   }
 }
 
@@ -138,8 +138,8 @@ class ReasonScreenExtra extends StatelessWidget { ///[Pantalla 8]
   Widget build(BuildContext context) {
     return const ReasonWidget(
       title: "EXTRA",
-      message: "Yo no dejare de amarte mami y quiero que siempre estes a mi lado porque tu compañia es mi felicidad <3",
-      messagePath: "assets/images/a (8).jpg",); //Implementar poder cambiar valores
+      message: "Porque siempre habra una razón extra para amarte",
+      messagePath: "assets/images/a (8).jpg",);
   }
 }
 

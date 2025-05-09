@@ -99,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         appBar: AppBar(
-          title: Text("PARA MAMI",style: Theme.of(context).textTheme.titleMedium,),
+          title: Text("TUS HIJOS",style: Theme.of(context).textTheme.titleMedium,),
           // No se especifica 'leading' para mantener el ícono de menú predeterminado
           actions: [
             Row(
@@ -149,9 +149,9 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             spacing: 20,
             children: [
-              Expanded(child: ElevatedButton(onPressed: (){}, child: Icon(Icons.delete))),
-              Expanded(child: ElevatedButton(onPressed: (){}, child: Icon(Icons.account_box))),
-              Expanded(child: ElevatedButton(onPressed: (){}, child: Icon(Icons.settings)))
+              Expanded(child: Tooltip(message: "Borrar",child: ElevatedButton(onPressed: (){}, child: Icon(Icons.delete)))),
+              Expanded(child: Tooltip(message: "Mi Mami",child: ElevatedButton(onPressed: (){}, child: Icon(Icons.account_box)))),
+              Expanded(child: Tooltip(message:"Opciones",child: ElevatedButton(onPressed: (){}, child: Icon(Icons.settings))))
             ],
           ),
           

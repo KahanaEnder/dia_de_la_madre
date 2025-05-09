@@ -309,6 +309,7 @@ class MyMaterials extends StatelessWidget {
 
 
   TooltipThemeData myTooltipThemes() => TooltipThemeData(
+    decoration: BoxDecoration(color: AppColors.background,borderRadius: BorderRadius.circular(5)),
     enableFeedback: true,
     excludeFromSemantics: false,
     height: 20,
