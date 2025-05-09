@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reference_app/src/components/app_colors.dart';
+import 'package:reference_app/src/core/view/reasons/reason_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -9,6 +10,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  void _navigateToReasonScreen(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ReasonScreen())); 
+  }
+  void _navigateToReasonScreen2(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ReasonScreen2()));
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,51 +35,67 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: Theme.of(context).textTheme.bodyLarge,
                     textAlign: TextAlign.center)),
               ),
-              ListTile(
+                ListTile(
                 leading: Icon(Icons.favorite,color: AppColors.primary,),
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 1',style: Theme.of(context).textTheme.titleLarge,),
-                onTap: () {},
+                onTap: () {
+                  _navigateToReasonScreen(context);
+                },
               ),
               ListTile(
                 leading: Icon(Icons.favorite,color: AppColors.primary,),
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 2',style: Theme.of(context).textTheme.titleLarge,),
-                onTap: () {},
+                onTap: () {
+                  _navigateToReasonScreen2(context);
+                },
               ),
               ListTile(
                 leading: Icon(Icons.favorite,color: AppColors.primary,),
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 3',style: Theme.of(context).textTheme.titleLarge,),
-                onTap: () {},
+                onTap: () {
+                  _navigateToReasonScreen(context);
+                },
               ),
               ListTile(
                 leading: Icon(Icons.favorite,color: AppColors.primary,),
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 4',style: Theme.of(context).textTheme.titleLarge,),
-                onTap: () {},
+                onTap: () {
+                  _navigateToReasonScreen(context);
+                },
               ),
               ListTile(
                 leading: Icon(Icons.favorite,color: AppColors.primary,),
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 5',style: Theme.of(context).textTheme.titleLarge,),
-                onTap: () {},
+                onTap: () {
+                  _navigateToReasonScreen(context);
+                },
               ),
               ListTile(
                 leading: Icon(Icons.favorite,color: AppColors.primary,),
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 6',style: Theme.of(context).textTheme.titleLarge,),
-                onTap: () {},
+                onTap: () {
+                  _navigateToReasonScreen(context);
+                },
               ),
               ListTile(
                 leading: Icon(Icons.favorite,color: AppColors.primary,),
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 7',style: Theme.of(context).textTheme.titleLarge,),
-                onTap: () {},
+                onTap: () {
+                  _navigateToReasonScreen(context);
+                },
               ),
               ListTile(
                 title: Text('Extra'),
-                onTap: () {},
+                onTap: () {
+                  _navigateToReasonScreen(context);
+                },
               ),
             ],
           ),
@@ -115,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           scale: 2.0,
                           child: Image.asset(
                             "assets/images/poncho.jpg",
-                            fit: BoxFit.fill,)), //implementar imagen
+                            fit: BoxFit.fill,)),
                       ),
                     ),
                   ),
