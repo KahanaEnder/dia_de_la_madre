@@ -53,19 +53,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: 'Secreto',
             onTap: () => _navigateTo(context,ReasonScreenExtra()),
           ),
-
-          SizedBox(height: 24),
-          _buildSectionHeader('Acerca de'),
-          _buildNavigationTile(
-            icon: Icons.info,
-            title: 'Información',
-            onTap: () => _navigateTo(context,ReasonScreen3()),
-          ),
-          _buildNavigationTile(
-            icon: Icons.privacy_tip,
-            title: 'Politicas',
-            onTap: () => _navigateTo(context,ReasonScreen4()),
-          ),
+          SizedBox(height: 100),
         ],
       ),
     );

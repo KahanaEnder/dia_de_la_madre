@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reference_app/src/components/app_colors.dart';
+import 'package:reference_app/src/core/view/ambar_screen.dart';
 import 'package:reference_app/src/core/view/reasons/house_screen.dart';
 import 'package:reference_app/src/core/view/reasons/mami_screen.dart';
 import 'package:reference_app/src/core/view/reasons/reason_screen.dart';
@@ -113,7 +114,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: () {},
                 ),
                 IconButton(
-                  onPressed: (){}, 
+                  onPressed: (){
+                    _navigateToScreen(context,() => AmbarScreen(),);
+                  }, 
                   icon: Icon(Icons.pets),
               ),
                 IconButton(
