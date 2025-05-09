@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:reference_app/src/components/my_materials.dart'; //Imports
+import 'package:window_size/window_size.dart';
 
 ///[Const]
 //Las propiedades y widgets CONST optimizan la App ya que no se reconstruyen con estados si no que son estaticas
@@ -47,7 +49,16 @@ flutter:
     - assets/icons/
 */
 //Es la forma correcta de agregar carpetas al pubspec
-void main() { //Metodo Main
+///[Se agrega la dependencia window_size para modificar las dimensiones en PC]
+void main() async { //Metodo Main
+  WidgetsFlutterBinding.ensureInitialized(); 
+
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    setWindowTitle('Para mi mamá');
+    setWindowMinSize(const Size(426, 240));
+    setWindowMaxSize(const Size(480, 720));
+    setWindowFrame(const Rect.fromLTWH(100, 100, 480, 720));
+  }
   runApp(const MainApp());
 }
 

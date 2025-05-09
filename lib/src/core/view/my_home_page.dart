@@ -111,7 +111,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         clipBehavior: Clip.antiAlias,
                         height: 256,
                         width: 192,
-                        child: Image.asset("assets/images/poncho.jpg",fit: BoxFit.fill), //implementar imagen
+                        child: Transform.scale(
+                          scale: 2.0,
+                          child: Image.asset(
+                            "assets/images/poncho.jpg",
+                            fit: BoxFit.fill,)), //implementar imagen
                       ),
                     ),
                   ),
@@ -124,7 +128,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         clipBehavior: Clip.antiAlias,
                         height: 256,
                         width: 192,
-                        child: Image.asset("assets/images/poncha_candy.jpg",fit: BoxFit.fill), 
+                        child: Transform.scale(
+                          scale: 2.0,
+                          child: Image.asset(
+                            "assets/images/poncha_candy.jpg",
+                            fit: BoxFit.fill,)), 
                       ),
                     ),
                   )
@@ -141,7 +149,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         clipBehavior: Clip.antiAlias,
                         height: 256,
                         width: 192,
-                        child: Image.asset("assets/images/poncha_ambar.jpg",fit: BoxFit.fill),
+                        child: Transform.scale(
+                          scale: 2.0,
+                          child: Image.asset(
+                            "assets/images/poncha_ambar.jpg",
+                            fit: BoxFit.fill,)),
                       ),
                     ),
                   ),
@@ -154,7 +166,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         clipBehavior: Clip.antiAlias,
                         height: 256,
                         width: 192,
-                        child: Image.asset("assets/images/ponchitos.jpg",fit: BoxFit.fill),
+                        child: Transform.scale(
+                          scale: 2.0,
+                          child: Image.asset(
+                            "assets/images/ponchitos.jpg",
+                            fit: BoxFit.fill,)),
                       ),
                     ),
                   )
