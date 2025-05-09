@@ -108,9 +108,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Container(
                         alignment: Alignment.center,
                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(32),color: AppColors.background),
+                        clipBehavior: Clip.antiAlias,
                         height: 256,
                         width: 192,
-                        child: null, //implementar imagen
+                        child: Image.asset("assets/images/poncho.jpg",fit: BoxFit.fill), //implementar imagen
                       ),
                     ),
                   ),
@@ -120,9 +121,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Container(
                         alignment: Alignment.center,
                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(32),color: AppColors.background),
+                        clipBehavior: Clip.antiAlias,
                         height: 256,
                         width: 192,
-                        child: null, 
+                        child: Image.asset("assets/images/poncha_candy.jpg",fit: BoxFit.fill), 
                       ),
                     ),
                   )
@@ -136,9 +138,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Container(
                         alignment: Alignment.center,
                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(32),color: AppColors.background),
+                        clipBehavior: Clip.antiAlias,
                         height: 256,
                         width: 192,
-                        child: null, 
+                        child: Image.asset("assets/images/poncha_ambar.jpg",fit: BoxFit.fill),
                       ),
                     ),
                   ),
@@ -148,14 +151,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Container(
                         alignment: Alignment.center,
                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(32),color: AppColors.background),
+                        clipBehavior: Clip.antiAlias,
                         height: 256,
                         width: 192,
-                        child: null, 
+                        child: Image.asset("assets/images/ponchitos.jpg",fit: BoxFit.fill),
                       ),
                     ),
                   )
                 ],
-              )
+              ),
             ],
           ),
         ),
