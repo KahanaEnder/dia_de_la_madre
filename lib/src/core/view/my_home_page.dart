@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:reference_app/src/components/app_colors.dart';
+import 'package:reference_app/src/core/view/reasons/house_screen.dart';
+import 'package:reference_app/src/core/view/reasons/mami_screen.dart';
 import 'package:reference_app/src/core/view/reasons/reason_screen.dart';
+import 'package:reference_app/src/core/view/reasons/settings_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -11,7 +14,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  void _navigateToReasonScreen(BuildContext context,Widget Function() screenBuilder) {
+  void _navigateToScreen(BuildContext context,Widget Function() screenBuilder) {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => screenBuilder())); 
   }
 
@@ -38,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 1',style: Theme.of(context).textTheme.titleLarge,),
                 onTap: () {
-                  _navigateToReasonScreen(context,() => ReasonScreen(),);
+                  _navigateToScreen(context,() => ReasonScreen(),);
                 },
               ),
               ListTile(
@@ -46,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 2',style: Theme.of(context).textTheme.titleLarge,),
                 onTap: () {
-                  _navigateToReasonScreen(context,() => ReasonScreen2(),);
+                  _navigateToScreen(context,() => ReasonScreen2(),);
                 },
               ),
               ListTile(
@@ -54,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 3',style: Theme.of(context).textTheme.titleLarge,),
                 onTap: () {
-                  _navigateToReasonScreen(context,() => ReasonScreen3(),);
+                  _navigateToScreen(context,() => ReasonScreen3(),);
                 },
               ),
               ListTile(
@@ -62,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 4',style: Theme.of(context).textTheme.titleLarge,),
                 onTap: () {
-                  _navigateToReasonScreen(context,() => ReasonScreen4(),);
+                  _navigateToScreen(context,() => ReasonScreen4(),);
                 },
               ),
               ListTile(
@@ -70,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 5',style: Theme.of(context).textTheme.titleLarge,),
                 onTap: () {
-                  _navigateToReasonScreen(context,() => ReasonScreen5(),);
+                  _navigateToScreen(context,() => ReasonScreen5(),);
                 },
               ),
               ListTile(
@@ -78,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 6',style: Theme.of(context).textTheme.titleLarge,),
                 onTap: () {
-                  _navigateToReasonScreen(context,() => ReasonScreen6(),);
+                  _navigateToScreen(context,() => ReasonScreen6(),);
                 },
               ),
               ListTile(
@@ -86,13 +89,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 trailing: Icon(Icons.favorite,color: AppColors.primary,),
                 title: Text('Razón 7',style: Theme.of(context).textTheme.titleLarge,),
                 onTap: () {
-                  _navigateToReasonScreen(context,() => ReasonScreen7(),);
+                  _navigateToScreen(context,() => ReasonScreen7(),);
                 },
               ),
               ListTile(
                 title: Text('Extra'),
                 onTap: () {
-                  _navigateToReasonScreen(context,() => ReasonScreenExtra(),);
+                  _navigateToScreen(context,() => ReasonScreenExtra(),);
                 },
               ),
             ],
@@ -114,7 +117,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   icon: Icon(Icons.pets),
               ),
                 IconButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    _navigateToScreen(context,() => HouseScreen(),);
+                  },
                   icon: Icon(Icons.house),
               ),
               ],
@@ -150,8 +155,8 @@ class _MyHomePageState extends State<MyHomePage> {
             spacing: 20,
             children: [
               Expanded(child: Tooltip(message: "Borrar",child: ElevatedButton(onPressed: (){}, child: Icon(Icons.delete)))),
-              Expanded(child: Tooltip(message: "Mi Mami",child: ElevatedButton(onPressed: (){}, child: Icon(Icons.account_box)))),
-              Expanded(child: Tooltip(message:"Opciones",child: ElevatedButton(onPressed: (){}, child: Icon(Icons.settings))))
+              Expanded(child: Tooltip(message: "Mi Mami",child: ElevatedButton(onPressed: (){_navigateToScreen(context,() => BeautifulScreen(),);}, child: Icon(Icons.account_box)))),
+              Expanded(child: Tooltip(message:"Opciones",child: ElevatedButton(onPressed: (){_navigateToScreen(context,() => SettingsScreen(),);}, child: Icon(Icons.settings))))
             ],
           ),
           

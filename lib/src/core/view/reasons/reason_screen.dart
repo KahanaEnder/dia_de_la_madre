@@ -47,13 +47,13 @@ class ReasonWidget extends StatelessWidget { ///[Widget personalizado]
   }
 }
 
-class ReasonScreen extends StatelessWidget { ///[Pantalla 1]
+class ReasonScreen extends StatelessWidget { ///[Pantalla 1] [Aca se guardan los comentarios en rojo para el intellisense, en la primera linea de la clase]
   const ReasonScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return  ReasonWidget(
-    title: "PRIMERO",
+    title: "PRIMERO", 
     message: "Siempre recuerda que te amo, tu me das un sentido para vivir y me llenas de inspiración y orgullo para salir adelante",
     messagePath:"assets/images/a (1).jpg" ,);
   }
