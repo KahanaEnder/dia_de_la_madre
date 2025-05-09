@@ -14,10 +14,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void _navigateToReasonScreen(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => ReasonScreen())); 
   }
+
   void _navigateToReasonScreen2(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => ReasonScreen2()));
   }
 
+  
 
   @override
   Widget build(BuildContext context) {
