@@ -97,11 +97,68 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-        body: Center(child: Column(
-          children: [
-            Text('Contenido principal'),
-          ],
-        )),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 32,right: 16,left: 32,bottom: 32),
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(32),color: AppColors.background),
+                        height: 256,
+                        width: 192,
+                        child: null, //implementar imagen
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 32,left: 16,right: 32,bottom: 32),
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(32),color: AppColors.background),
+                        height: 256,
+                        width: 192,
+                        child: null, 
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 32,right: 16,left: 32,bottom: 32),
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(32),color: AppColors.background),
+                        height: 256,
+                        width: 192,
+                        child: null, 
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 32,left: 16,right: 32,bottom: 32),
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(32),color: AppColors.background),
+                        height: 256,
+                        width: 192,
+                        child: null, 
+                      ),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           tooltip: "Añadir",
@@ -113,12 +170,18 @@ class _MyHomePageState extends State<MyHomePage> {
             spacing: 20,
             children: [
               Expanded(child: ElevatedButton(onPressed: (){}, child: Icon(Icons.delete))),
-              Expanded(child: ElevatedButton(onPressed: (){}, child: Icon(Icons.add))),
+              Expanded(child: ElevatedButton(onPressed: (){}, child: Icon(Icons.account_box))),
               Expanded(child: ElevatedButton(onPressed: (){}, child: Icon(Icons.settings)))
             ],
           ),
           
         ],
+        bottomNavigationBar:BottomAppBar(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Text("CON AMOR DE JUAN",textAlign: TextAlign.center,style: Theme.of(context).textTheme.titleMedium,),
+          ),
+        ),
       ),
     );
   }

@@ -625,13 +625,13 @@ class MyMaterials extends StatelessWidget {
 
 
   BottomAppBarTheme myBottomAppBarThemes() => BottomAppBarTheme(
-    color: AppColors.secondary,
+    color: AppColors.primary,
     elevation: 20,
-    height: 100,
+    height: 48,
     padding: EdgeInsetsDirectional.symmetric(),
-    shadowColor: AppColors.backgroundComponent,
+    shadowColor: AppColors.darkText,
     shape: CircularNotchedRectangle(),
-    surfaceTintColor: AppColors.primary
+    surfaceTintColor: AppColors.accent
   );
 
 
@@ -740,7 +740,7 @@ class MyMaterials extends StatelessWidget {
   IconThemeData myIconThemes() {
     return IconThemeData(
       //applyTextScaling: true,
-      color: AppColors.secondary,
+      color: AppColors.background,
       opacity: 1,
       //size: 23,
       //weight: 300,
