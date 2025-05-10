@@ -1,7 +1,7 @@
 name: reference_app
-description: "Proyecto de referencia para estructurar apps en flutter"
+description: "Proyecto de flutter para mi mamá"
 publish_to: 'none'
-version: 0.1.1
+version: 1.0.0
 
 environment:
   sdk: ^3.7.2
@@ -13,6 +13,7 @@ dependencies:
   permission_handler: ^12.0.0+1
   image_picker: ^1.1.2
   shared_preferences: ^2.5.3
+  device_info_plus: ^11.4.0
 
 dev_dependencies:
   flutter_test:

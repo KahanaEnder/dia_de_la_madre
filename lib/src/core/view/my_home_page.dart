@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:reference_app/src/components/app_colors.dart';
 import 'package:reference_app/src/core/view/ambar_screen.dart';
@@ -20,6 +21,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool _isSnackBarVisible = false;
+
+  Future<bool> _requestStoragePermission() async {
+  if (Platform.isAndroid) {
+    final androidInfo = await DeviceInfoPlugin().androidInfo;
+    final sdkInt = androidInfo.version.sdkInt;
+
+    if (sdkInt >= 33) {
+      final status = await Permission.photos.request();
+      return status.isGranted;
+    } else {
+      final status = await Permission.storage.request();
+      return status.isGranted;
+    }
+  }
+
+  return false; // iOS u otro
+}
 
 
 
@@ -47,16 +66,29 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Future<void> _pickImages() async {
-    // 1. Permiso
-    final status = await Permission.photos.request();
-    if (!mounted) return;
-    if (!status.isGranted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sin permiso')),
-      );
-      return;
-    }
+Future<void> _pickImages() async {
+  // 1. Solicitar permisos según versión de Android
+  final hasPermission = await _requestStoragePermission();
+  if (!mounted) return;
+
+if (!hasPermission) {
+  if (!_isSnackBarVisible) {
+    _isSnackBarVisible = true;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Sin Permiso'),
+        duration: Duration(seconds: 2),
+      ),
+    ).closed.then((_) {
+      if (mounted) {
+        setState(() {
+          _isSnackBarVisible = false;
+        });
+      }
+    });
+  }
+  return;
+}
 
     try {
       // 2. Selección

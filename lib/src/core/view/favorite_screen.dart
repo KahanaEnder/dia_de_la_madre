@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:reference_app/src/components/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+
 
 class LoadImagesScreen extends StatefulWidget {
   const LoadImagesScreen({super.key});
@@ -14,6 +16,8 @@ class LoadImagesScreen extends StatefulWidget {
 }
 
 class _LoadImagesScreenState extends State<LoadImagesScreen> {
+  bool _isSnackBarVisible = false;
+
   final ImagePicker _picker = ImagePicker();
   List<File> _images = [];
 
@@ -33,42 +37,75 @@ class _LoadImagesScreenState extends State<LoadImagesScreen> {
     });
   }
 
+Future<bool> _requestStoragePermission() async {
+  if (Platform.isAndroid) {
+    final androidInfo = await DeviceInfoPlugin().androidInfo;
+    final sdkInt = androidInfo.version.sdkInt;
+
+    if (sdkInt >= 33) {
+      final status = await Permission.photos.request();
+      return status.isGranted;
+    } else {
+      final status = await Permission.storage.request();
+      return status.isGranted;
+    }
+  }
+
+  return false; // iOS u otro
+}
+
+
   Future<void> _saveImagePaths() async {
     final prefs = await SharedPreferences.getInstance();
     final paths = _images.map((file) => file.path).toList();
     await prefs.setStringList('saved_image_paths', paths);
   }
 
-  Future<void> _pickImages() async {
-    // 1. Pedir permiso
-    final status = await Permission.photos.request();
-    if (!mounted) return;
-    if (!status.isGranted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sin Permiso')),
-      );
-      return;
-    }
+Future<void> _pickImages() async {
+  // 1. Solicitar permisos según versión de Android
+  final hasPermission = await _requestStoragePermission();
+  if (!mounted) return;
 
-    try {
-      // 2. Seleccionar múltiples imágenes
-      final List<XFile> selected = await _picker.pickMultiImage();
-      if (!mounted) return;
-
-      if (selected.isNotEmpty) {
-        final files = selected.map((x) => File(x.path)).toList();
+if (!hasPermission) {
+  if (!_isSnackBarVisible) {
+    _isSnackBarVisible = true;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Sin Permiso'),
+        duration: Duration(seconds: 2),
+      ),
+    ).closed.then((_) {
+      if (mounted) {
         setState(() {
-          _images.addAll(files);
+          _isSnackBarVisible = false;
         });
-        await _saveImagePaths();
       }
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error cargando imágenes: $e')),
-      );
-    }
+    });
   }
+  return;
+}
+
+
+  try {
+    // 2. Seleccionar múltiples imágenes
+    final List<XFile> selected = await _picker.pickMultiImage();
+    if (!mounted) return;
+
+    if (selected.isNotEmpty) {
+      final files = selected.map((x) => File(x.path)).toList();
+      setState(() {
+        _images.addAll(files);
+      });
+      await _saveImagePaths();
+    }
+  } catch (e) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Error cargando imágenes: $e')),
+    );
+  }
+}
+
 
   Future<void> _removeImage(int index) async {
     setState(() {
