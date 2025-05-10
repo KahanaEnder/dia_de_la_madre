@@ -12,7 +12,7 @@ class MyMaterials extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(//Aca definimos los temas de la App y podemos crear una clase para definir los colores como propiedades static
-      title: "Proyecto de referencia",
+      title: "Para Mamá",
       color: AppColors.primary,
       theme: myAppThemes(),
       //darkTheme: ThemeData.dark(), 
