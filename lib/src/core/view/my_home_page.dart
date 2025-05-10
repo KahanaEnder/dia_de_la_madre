@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:reference_app/src/components/app_colors.dart';
 import 'package:reference_app/src/core/view/ambar_screen.dart';
+import 'package:reference_app/src/core/view/favorite_screen.dart';
 import 'package:reference_app/src/core/view/reasons/house_screen.dart';
 import 'package:reference_app/src/core/view/reasons/mami_screen.dart';
 import 'package:reference_app/src/core/view/reasons/reason_screen.dart';
 import 'package:reference_app/src/core/view/reasons/settings_screen.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -15,10 +18,45 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+
+  final ImagePicker _picker = ImagePicker();
+  final List<XFile> _images = [];
+
   void _navigateToScreen(BuildContext context,Widget Function() screenBuilder) {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => screenBuilder())); 
   }
 
+  Future<void> _pickImages() async {
+    // Solicitar permiso para el almacenamiento/galería
+    final status = await Permission.photos.request();
+    if (!mounted) return;
+
+    if (!status.isGranted) {
+      // Mostrar mensaje si el permiso no es concedido
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Permiso de galería denegado')),
+      );
+      return;
+    }
+
+    try {
+      // Permite seleccionar múltiples imágenes (o usa pickImage para una sola)
+      final List<XFile> selected = await _picker.pickMultiImage();
+      if (!mounted) return;
+
+      if (selected.isNotEmpty) {
+        setState(() {
+          _images.addAll(selected);
+        });
+      }
+    } catch (e) {
+      if (!mounted) return;
+      // Manejar errores
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error cargando imágenes: \$e')),
+      );
+    }
+  }
 
 
   @override
@@ -111,7 +149,9 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 IconButton(
                   icon: Icon(Icons.favorite_outline_sharp),
-                  onPressed: () {},
+                  onPressed: () {
+                    _navigateToScreen(context,() => LoadImagesScreen(),);
+                  },
                 ),
                 IconButton(
                   onPressed: (){
@@ -148,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: _pickImages,
           tooltip: "Añadir",
           child: Icon(Icons.add),
           ),
@@ -157,7 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             spacing: 20,
             children: [
-              Expanded(child: Tooltip(message: "Borrar",child: ElevatedButton(onPressed: (){}, child: Icon(Icons.delete)))),
+              //Expanded(child: Tooltip(message: "Borrar",child: ElevatedButton(onPressed: (){}, child: Icon(Icons.delete)))),
               Expanded(child: Tooltip(message: "Mi Mami",child: ElevatedButton(onPressed: (){_navigateToScreen(context,() => BeautifulScreen(),);}, child: Icon(Icons.account_box)))),
               Expanded(child: Tooltip(message:"Opciones",child: ElevatedButton(onPressed: (){_navigateToScreen(context,() => SettingsScreen(),);}, child: Icon(Icons.settings))))
             ],
