@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:reference_app/src/components/app_colors.dart';
 import 'package:reference_app/src/core/view/ambar_screen.dart';
@@ -8,6 +10,7 @@ import 'package:reference_app/src/core/view/reasons/reason_screen.dart';
 import 'package:reference_app/src/core/view/reasons/settings_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -19,45 +22,72 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
 
-  final ImagePicker _picker = ImagePicker();
-  final List<XFile> _images = [];
+
 
   void _navigateToScreen(BuildContext context,Widget Function() screenBuilder) {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => screenBuilder())); 
   }
 
+
+  final ImagePicker _picker = ImagePicker();
+  List<XFile> _images = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedImages(); // opcional si quieres mostrar aquí también
+  }
+
+  Future<void> _loadSavedImages() async {
+    final prefs = await SharedPreferences.getInstance();
+    final paths = prefs.getStringList('saved_image_paths') ?? [];
+    // Si quieres llenar _images con XFile (y mostrarlos en Home)
+    setState(() {
+      _images = paths.map((p) => XFile(p)).where((xf) => File(xf.path).existsSync()).toList();
+    });
+  }
+
   Future<void> _pickImages() async {
-    // Solicitar permiso para el almacenamiento/galería
+    // 1. Permiso
     final status = await Permission.photos.request();
     if (!mounted) return;
-
     if (!status.isGranted) {
-      // Mostrar mensaje si el permiso no es concedido
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Permiso de galería denegado')),
+        const SnackBar(content: Text('Sin permiso')),
       );
       return;
     }
 
     try {
-      // Permite seleccionar múltiples imágenes (o usa pickImage para una sola)
+      // 2. Selección
       final List<XFile> selected = await _picker.pickMultiImage();
       if (!mounted) return;
+      if (selected.isEmpty) return;
 
-      if (selected.isNotEmpty) {
-        setState(() {
-          _images.addAll(selected);
-        });
-      }
+      // 3. Guardar en tu estado local (opcional si no los muestras aquí)
+      setState(() {
+        _images.addAll(selected);
+      });
+
+      // 4. Guardar rutas en SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      // Si quieres **añadir** a las rutas existentes:
+      final old = prefs.getStringList('saved_image_paths') ?? [];
+      final added = selected.map((xf) => xf.path).toList();
+      await prefs.setStringList('saved_image_paths', [...old, ...added]);
+
+      /// ignore: use_build_context_synchronously [Ignorado el context que puede ser peligroso necesita refactor]
+      ScaffoldMessenger.of(context).showSnackBar(
+        /// ignore: use_build_context_synchronously [Ignorado el context que puede causar un crash]
+        SnackBar(content: Text('Imágenes Guardadas',style:Theme.of(context).textTheme.bodySmall)),
+      );
     } catch (e) {
       if (!mounted) return;
-      // Manejar errores
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error cargando imágenes: \$e')),
+        SnackBar(content: Text('Error seleccionando imágenes: $e')),
       );
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
