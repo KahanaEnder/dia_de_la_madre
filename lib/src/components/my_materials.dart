@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:reference_app/src/components/app_colors.dart';
+import 'package:reference_app/src/core/view/ambar_screen.dart';
+import 'package:reference_app/src/core/view/favorite_screen.dart';
 import 'package:reference_app/src/core/view/my_home_page.dart';
+import 'package:reference_app/src/core/view/reasons/house_screen.dart';
+import 'package:reference_app/src/core/view/reasons/mami_screen.dart';
+import 'package:reference_app/src/core/view/reasons/settings_screen.dart';
 
 class MyMaterials extends StatelessWidget {
   const MyMaterials({
@@ -21,6 +26,14 @@ class MyMaterials extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       key: const Key("Llave del MaterialApp"),
       home: MyHomePage(),
+      routes: {
+        ///'/': (_) => const MyHomePage(), [No se puede usar el parametro home: y ruta por defecto '/' porque es redundante y lanza una excepción]
+        '/ambar': (_) => const AmbarScreen(),
+        '/favorites': (_) => const LoadImagesScreen(),
+        '/house': (_) => const HouseScreen(),
+        '/settings': (_) => const SettingsScreen(),
+        '/mami': (_) => const BeautifulScreen(),
+      },
     );
   }
 

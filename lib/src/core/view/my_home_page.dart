@@ -1,17 +1,6 @@
-import 'dart:io';
-
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:reference_app/src/components/app_colors.dart';
-import 'package:reference_app/src/core/view/ambar_screen.dart';
-import 'package:reference_app/src/core/view/favorite_screen.dart';
-import 'package:reference_app/src/core/view/reasons/house_screen.dart';
-import 'package:reference_app/src/core/view/reasons/mami_screen.dart';
 import 'package:reference_app/src/core/view/reasons/reason_screen.dart';
-import 'package:reference_app/src/core/view/reasons/settings_screen.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -23,102 +12,17 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool _isSnackBarVisible = false;
 
-  Future<bool> _requestStoragePermission() async {
-  if (Platform.isAndroid) {
-    final androidInfo = await DeviceInfoPlugin().androidInfo;
-    final sdkInt = androidInfo.version.sdkInt;
 
-    if (sdkInt >= 33) {
-      final status = await Permission.photos.request();
-      return status.isGranted;
-    } else {
-      final status = await Permission.storage.request();
-      return status.isGranted;
-    }
-  }
-
-  return false; // iOS u otro
-}
-
-
-
+  void _navigateTo(String route) => Navigator.pushNamed(context, route); ///[Navegación PushNamed definida en MaterialApp]
 
   void _navigateToScreen(BuildContext context,Widget Function() screenBuilder) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => screenBuilder())); 
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => screenBuilder())); ///[Navegaciíon simple usada en ListTiles]
   }
 
-
-  final ImagePicker _picker = ImagePicker();
-  List<XFile> _images = [];
 
   @override
   void initState() {
     super.initState();
-    _loadSavedImages(); // opcional si quieres mostrar aquí también
-  }
-
-  Future<void> _loadSavedImages() async {
-    final prefs = await SharedPreferences.getInstance();
-    final paths = prefs.getStringList('saved_image_paths') ?? [];
-    // Si quieres llenar _images con XFile (y mostrarlos en Home)
-    setState(() {
-      _images = paths.map((p) => XFile(p)).where((xf) => File(xf.path).existsSync()).toList();
-    });
-  }
-
-Future<void> _pickImages() async {
-  // 1. Solicitar permisos según versión de Android
-  final hasPermission = await _requestStoragePermission();
-  if (!mounted) return;
-
-if (!hasPermission) {
-  if (!_isSnackBarVisible) {
-    _isSnackBarVisible = true;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Sin Permiso'),
-        duration: Duration(seconds: 2),
-      ),
-    ).closed.then((_) {
-      if (mounted) {
-        setState(() {
-          _isSnackBarVisible = false;
-        });
-      }
-    });
-  }
-  return;
-}
-
-    try {
-      // 2. Selección
-      final List<XFile> selected = await _picker.pickMultiImage();
-      if (!mounted) return;
-      if (selected.isEmpty) return;
-
-      // 3. Guardar en tu estado local (opcional si no los muestras aquí)
-      setState(() {
-        _images.addAll(selected);
-      });
-
-      // 4. Guardar rutas en SharedPreferences
-      final prefs = await SharedPreferences.getInstance();
-      // Si quieres **añadir** a las rutas existentes:
-      final old = prefs.getStringList('saved_image_paths') ?? [];
-      final added = selected.map((xf) => xf.path).toList();
-      await prefs.setStringList('saved_image_paths', [...old, ...added]);
-
-      /// ignore: use_build_context_synchronously [Ignorado el context que puede ser peligroso necesita refactor]
-      ScaffoldMessenger.of(context).showSnackBar(
-        /// ignore: use_build_context_synchronously [Ignorado el context que puede causar un crash]
-        SnackBar(content: Text('Imágenes Guardadas',style:Theme.of(context).textTheme.bodySmall)),
-      );
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error seleccionando imágenes: $e')),
-      );
-    }
   }
 
   @override
@@ -137,68 +41,14 @@ if (!hasPermission) {
                     style: Theme.of(context).textTheme.bodyLarge,
                     textAlign: TextAlign.center)),
               ),
-                ListTile(
-                leading: Icon(Icons.favorite,color: AppColors.primary,),
-                trailing: Icon(Icons.favorite,color: AppColors.primary,),
-                title: Text('Razón 1',style: Theme.of(context).textTheme.titleLarge,),
-                onTap: () {
-                  _navigateToScreen(context,() => ReasonScreen(),);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.favorite,color: AppColors.primary,),
-                trailing: Icon(Icons.favorite,color: AppColors.primary,),
-                title: Text('Razón 2',style: Theme.of(context).textTheme.titleLarge,),
-                onTap: () {
-                  _navigateToScreen(context,() => ReasonScreen2(),);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.favorite,color: AppColors.primary,),
-                trailing: Icon(Icons.favorite,color: AppColors.primary,),
-                title: Text('Razón 3',style: Theme.of(context).textTheme.titleLarge,),
-                onTap: () {
-                  _navigateToScreen(context,() => ReasonScreen3(),);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.favorite,color: AppColors.primary,),
-                trailing: Icon(Icons.favorite,color: AppColors.primary,),
-                title: Text('Razón 4',style: Theme.of(context).textTheme.titleLarge,),
-                onTap: () {
-                  _navigateToScreen(context,() => ReasonScreen4(),);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.favorite,color: AppColors.primary,),
-                trailing: Icon(Icons.favorite,color: AppColors.primary,),
-                title: Text('Razón 5',style: Theme.of(context).textTheme.titleLarge,),
-                onTap: () {
-                  _navigateToScreen(context,() => ReasonScreen5(),);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.favorite,color: AppColors.primary,),
-                trailing: Icon(Icons.favorite,color: AppColors.primary,),
-                title: Text('Razón 6',style: Theme.of(context).textTheme.titleLarge,),
-                onTap: () {
-                  _navigateToScreen(context,() => ReasonScreen6(),);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.favorite,color: AppColors.primary,),
-                trailing: Icon(Icons.favorite,color: AppColors.primary,),
-                title: Text('Razón 7',style: Theme.of(context).textTheme.titleLarge,),
-                onTap: () {
-                  _navigateToScreen(context,() => ReasonScreen7(),);
-                },
-              ),
-              ListTile(
-                title: Text('Extra'),
-                onTap: () {
-                  _navigateToScreen(context,() => ReasonScreenExtra(),);
-                },
-              ),
+              listReasons(context, tituloRazon: 'Razón 1', reasonScreen: () => ReasonScreen()),
+              listReasons(context, tituloRazon: 'Razón 2', reasonScreen: () => ReasonScreen2()),
+              listReasons(context, tituloRazon: 'Razón 3', reasonScreen: () => ReasonScreen3()),
+              listReasons(context, tituloRazon: 'Razón 4', reasonScreen: () => ReasonScreen4()),
+              listReasons(context, tituloRazon: 'Razón 5', reasonScreen: () => ReasonScreen5()),
+              listReasons(context, tituloRazon: 'Razón 6', reasonScreen: () => ReasonScreen6()),
+              listReasons(context, tituloRazon: 'Razón 7', reasonScreen: () => ReasonScreen7()),
+              listReasons(context, tituloRazon: 'Extra', reasonScreen: () => ReasonScreenExtra()),
             ],
           ),
         ),
@@ -210,20 +60,20 @@ if (!hasPermission) {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  icon: Icon(Icons.favorite_outline_sharp),
+                  icon: const Icon(Icons.favorite_outline_sharp),
                   onPressed: () {
-                    _navigateToScreen(context,() => LoadImagesScreen(),);
+                    _navigateTo("/favorites");
                   },
                 ),
                 IconButton(
                   onPressed: (){
-                    _navigateToScreen(context,() => AmbarScreen(),);
+                    _navigateTo("/ambar");
                   }, 
                   icon: Icon(Icons.pets),
               ),
                 IconButton(
                   onPressed: (){
-                    _navigateToScreen(context,() => HouseScreen(),);
+                    _navigateTo("/house");
                   },
                   icon: Icon(Icons.house),
               ),
@@ -231,7 +81,7 @@ if (!hasPermission) {
             ),
           ],
         ),
-        body: SingleChildScrollView(
+        body: const SingleChildScrollView(
           child: Column(
             children: [
               Row(
@@ -250,7 +100,7 @@ if (!hasPermission) {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: _pickImages,
+          onPressed: (){},
           tooltip: "Añadir",
           child: Icon(Icons.add),
           ),
@@ -260,8 +110,8 @@ if (!hasPermission) {
             spacing: 20,
             children: [
               //Expanded(child: Tooltip(message: "Borrar",child: ElevatedButton(onPressed: (){}, child: Icon(Icons.delete)))),
-              Expanded(child: Tooltip(message: "Mi Mami",child: ElevatedButton(onPressed: (){_navigateToScreen(context,() => BeautifulScreen(),);}, child: Icon(Icons.account_box)))),
-              Expanded(child: Tooltip(message:"Opciones",child: ElevatedButton(onPressed: (){_navigateToScreen(context,() => SettingsScreen(),);}, child: Icon(Icons.settings))))
+              Expanded(child: Tooltip(message: "Mi Mami",child: ElevatedButton(onPressed: (){_navigateTo("/mami");}, child: Icon(Icons.account_box)))),
+              Expanded(child: Tooltip(message:"Opciones",child: ElevatedButton(onPressed: (){_navigateTo("/settings");}, child: Icon(Icons.settings))))
             ],
           ),
           
@@ -273,6 +123,17 @@ if (!hasPermission) {
           ),
         ),
       ),
+    );
+  }
+
+  Widget listReasons(BuildContext context, {required String tituloRazon, required Widget Function() reasonScreen}) {
+    return ListTile(
+      leading: Icon(Icons.favorite, color: AppColors.primary,),
+      trailing: Icon(Icons.favorite, color: AppColors.primary,),
+      title: Text(tituloRazon, style: Theme.of(context).textTheme.titleLarge,),
+      onTap: () {
+        _navigateToScreen(context, reasonScreen);
+      },
     );
   }
 }

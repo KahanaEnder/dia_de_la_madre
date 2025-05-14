@@ -2,6 +2,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:reference_app/src/components/my_materials.dart'; //Imports
 import 'package:window_size/window_size.dart';
+import 'package:provider/provider.dart';
+import 'package:reference_app/src/core/service/permission_service.dart';
+import 'package:reference_app/src/core/service/image_service.dart';
+import 'package:reference_app/src/core/providers/image_provider.dart';
 
 ///[Const]
 //Las propiedades y widgets CONST optimizan la App ya que no se reconstruyen con estados si no que son estaticas
@@ -59,7 +63,19 @@ void main() async { //Metodo Main
     setWindowMaxSize(const Size(480, 720));
     setWindowFrame(const Rect.fromLTWH(100, 100, 480, 720));
   }
-  runApp(const MainApp());
+  runApp(MultiProvider(
+      providers: [
+        Provider(create: (_) => PermissionService()),
+        Provider(create: (_) => ImageService()),
+        ChangeNotifierProvider(
+          create: (context) => ImageGalleryProvider(
+            context.read<PermissionService>(),
+            context.read<ImageService>(),
+          ),
+        ),
+      ],
+      child: const MainApp(),
+    ),);
 }
 
 ///[Atajos]

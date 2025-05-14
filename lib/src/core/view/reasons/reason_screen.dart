@@ -19,9 +19,9 @@ class ReasonWidget extends StatelessWidget { ///[Widget personalizado]
         appBar: AppBar(
           leading: IconButton(
             onPressed: Navigator.of(context).pop,
-            icon: Icon(Icons.arrow_back)
+            icon: const Icon(Icons.arrow_back)
             ),
-          title: Text(title),
+          title:Text(title),
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -52,7 +52,7 @@ class ReasonScreen extends StatelessWidget { ///[Pantalla 1] [Aca se guardan los
 
   @override
   Widget build(BuildContext context) { 
-    return  ReasonWidget(
+    return const ReasonWidget(
     title: "PRIMERO", 
     message: "Siempre recuerda que te amo, tu me das un sentido para vivir y me llenas de inspiración y orgullo para salir adelante",
     messagePath:"assets/images/a (1).jpg" ,);
