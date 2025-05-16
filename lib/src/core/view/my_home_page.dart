@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:reference_app/src/components/app_colors.dart';
 import 'package:reference_app/src/core/view/reasons/reason_screen.dart';
+import 'package:provider/provider.dart';
+import 'dart:io';
+import 'package:reference_app/src/core/providers/image_provider.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -10,7 +13,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool _isSnackBarVisible = false;
+  //bool _isSnackBarVisible = false;
 
 
   void _navigateTo(String route) => Navigator.pushNamed(context, route); ///[Navegación PushNamed definida en MaterialApp]
@@ -23,10 +26,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ImageGalleryProvider>().initialize();
+    });
+    
   }
 
   @override
   Widget build(BuildContext context) {
+    final gallery = context.watch<ImageGalleryProvider>();
     return SafeArea(
       child: Scaffold(
         drawer: Drawer(
@@ -52,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-        appBar: AppBar(
+        appBar: _buildAppBar(),/*AppBar(
           title: Text("TUS HIJOS",style: Theme.of(context).textTheme.titleMedium,),
           // No se especifica 'leading' para mantener el ícono de menú predeterminado
           actions: [
@@ -80,8 +88,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ],
-        ),
-        body: const SingleChildScrollView(
+        ),*/
+        body:_buildBody(gallery), /*const SingleChildScrollView(
           child: Column(
             children: [
               Row(
@@ -98,9 +106,9 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ],
           ),
-        ),
+        ),*/
         floatingActionButton: FloatingActionButton(
-          onPressed: (){},
+          onPressed: () => context.read<ImageGalleryProvider>().pickAndSave(),
           tooltip: "Añadir",
           child: Icon(Icons.add),
           ),
@@ -123,6 +131,42 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
+    );
+  }
+  AppBar _buildAppBar() => AppBar(
+        title: Text('TUS HIJOS',style:Theme.of(context).textTheme.labelLarge),
+        actions: [
+          IconButton(icon: const Icon(Icons.favorite_outline), onPressed: () => _navigateTo('/favorites')),
+          IconButton(icon: const Icon(Icons.pets), onPressed: () => _navigateTo('/ambar')),
+          IconButton(icon: const Icon(Icons.house), onPressed: () => _navigateTo('/house')),
+        ],
+      );
+
+  Widget _buildBody(ImageGalleryProvider gallery) {
+    if (gallery.loading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    if (gallery.error != null) {
+      return Center(child: Text('Error: \${gallery.error}'));
+    }
+    if (gallery.images.isEmpty) {
+      return  Center(child: Text('No hay imágenes.\nPresiona + para añadir.',));
+    }
+    return GridView.builder(
+      padding: const EdgeInsets.all(16),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+      ),
+      itemCount: gallery.images.length,
+      itemBuilder: (_, idx) {
+        final file = gallery.images[idx];
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Image.file(File(file.path), fit: BoxFit.cover),
+        );
+      },
     );
   }
 
