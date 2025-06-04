@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:reference_app/src/components/data.dart';
 
-class HouseScreen extends StatelessWidget {
-  const HouseScreen({super.key});
+class BeautifulScreen extends StatelessWidget {
+  const BeautifulScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SONADORA'),
+        title: const Text(Data.mami),
         centerTitle: true,
         elevation: 30,
         backgroundColor: Colors.deepPurpleAccent,
@@ -34,7 +35,7 @@ class HouseScreen extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: Image.asset(
-                      'assets/images/1.jpg',
+                      DataImages.quince,
                       height: 200,
                       fit: BoxFit.cover,
                     ),
@@ -42,7 +43,7 @@ class HouseScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   // Texto descriptivo
                   Text(
-                    'Un lugar conseguido con sacrificio',
+                    Data.fuerte,
                     style: Theme.of(context).textTheme.bodyLarge,
                     overflow: TextOverflow.visible,
                     textAlign: TextAlign.center,),
@@ -51,7 +52,7 @@ class HouseScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: const [
-                      DecorIcon(icon: Icons.house_siding_sharp, label: ''),
+                      DecorIcon(icon: Icons.favorite, label: ''),
                     ],
                   ),
                   SizedBox(
@@ -68,7 +69,7 @@ class HouseScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:  [
                           Text(
-                            'Con trabajo, dedicación y paciencia has logrado construir otro hogar donde poder cumplir cualquier sueño, cuando lo veas siempre recuerda que es el fruto de tu perseverancia',
+                            Data.mensajeMami,
                             style: Theme.of(context).textTheme.bodyLarge,
                             overflow: TextOverflow.visible,
                           ),

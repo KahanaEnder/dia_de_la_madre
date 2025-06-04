@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:reference_app/src/components/data.dart';
 
-class BeautifulScreen extends StatelessWidget {
-  const BeautifulScreen({super.key});
+class AmbarScreen extends StatelessWidget {
+  const AmbarScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('MAMI'),
+        title: const Text(Data.ambar),
         centerTitle: true,
         elevation: 30,
         backgroundColor: Colors.deepPurpleAccent,
@@ -34,7 +35,7 @@ class BeautifulScreen extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: Image.asset(
-                      'assets/images/a (15).jpg',
+                      DataImages.ambar,
                       height: 200,
                       fit: BoxFit.cover,
                     ),
@@ -42,7 +43,7 @@ class BeautifulScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   // Texto descriptivo
                   Text(
-                    'Una mujer fuerte e inteligente',
+                    Data.gatitaCosmica,
                     style: Theme.of(context).textTheme.bodyLarge,
                     overflow: TextOverflow.visible,
                     textAlign: TextAlign.center,),
@@ -68,7 +69,7 @@ class BeautifulScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:  [
                           Text(
-                            'Una fuente de inspiración y ejemplo a seguir la cual tiene 4 hijos que cuida y protege, aunque una ya no necesita cuido ni agua solo necesita amor y ser recordada.',
+                            Data.mensajeAmbar,
                             style: Theme.of(context).textTheme.bodyLarge,
                             overflow: TextOverflow.visible,
                           ),

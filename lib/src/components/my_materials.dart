@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:reference_app/src/components/app_colors.dart';
-import 'package:reference_app/src/core/view/ambar_screen.dart';
-import 'package:reference_app/src/core/view/favorite_screen.dart';
-import 'package:reference_app/src/core/view/my_home_page.dart';
-import 'package:reference_app/src/core/view/reasons/house_screen.dart';
-import 'package:reference_app/src/core/view/reasons/mami_screen.dart';
-import 'package:reference_app/src/core/view/reasons/settings_screen.dart';
+import 'package:reference_app/src/core/view/pages/ambar_screen.dart';
+import 'package:reference_app/src/core/view/pages/favorite_screen.dart';
+import 'package:reference_app/src/core/view/pages/my_home_page.dart';
+import 'package:reference_app/src/core/view/pages/reasons/house_screen.dart';
+import 'package:reference_app/src/core/view/pages/reasons/mami_screen.dart';
+import 'package:reference_app/src/core/view/pages/reasons/settings_screen.dart';
 
 class MyMaterials extends StatelessWidget {
   const MyMaterials({

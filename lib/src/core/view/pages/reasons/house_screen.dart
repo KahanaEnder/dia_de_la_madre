@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:reference_app/src/components/data.dart';
 
-class AmbarScreen extends StatelessWidget {
-  const AmbarScreen({super.key});
+class HouseScreen extends StatelessWidget {
+  const HouseScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('AmbarHermosa'),
+        title: const Text(Data.sonadora),
         centerTitle: true,
         elevation: 30,
         backgroundColor: Colors.deepPurpleAccent,
@@ -34,7 +35,7 @@ class AmbarScreen extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: Image.asset(
-                      'assets/images/ambarhermosa.jpg',
+                      DataImages.primero,
                       height: 200,
                       fit: BoxFit.cover,
                     ),
@@ -42,7 +43,7 @@ class AmbarScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   // Texto descriptivo
                   Text(
-                    'Una Gata cosmica pechocha',
+                    Data.sonadoraDescripcion,
                     style: Theme.of(context).textTheme.bodyLarge,
                     overflow: TextOverflow.visible,
                     textAlign: TextAlign.center,),
@@ -51,7 +52,7 @@ class AmbarScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: const [
-                      DecorIcon(icon: Icons.favorite, label: ''),
+                      DecorIcon(icon: Icons.house_siding_sharp, label: ''),
                     ],
                   ),
                   SizedBox(
@@ -68,7 +69,7 @@ class AmbarScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:  [
                           Text(
-                            '«Cada estrella en el cielo me recuerda que sigues conmigo.»\n \n Te amamos\nGatita Cosmica',
+                            Data.sonadoraMensaje,
                             style: Theme.of(context).textTheme.bodyLarge,
                             overflow: TextOverflow.visible,
                           ),

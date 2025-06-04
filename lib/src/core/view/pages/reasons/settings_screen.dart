@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reference_app/src/core/view/reasons/mami_screen.dart';
-import 'package:reference_app/src/core/view/reasons/reason_screen.dart';
+import 'package:reference_app/src/core/view/pages/reasons/mami_screen.dart';
+import 'package:reference_app/src/core/view/pages/reasons/reason_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:reference_app/src/components/app_colors.dart';
-import 'package:reference_app/src/core/view/reasons/reason_screen.dart';
+import 'package:reference_app/src/components/app_routes.dart';
+import 'package:reference_app/src/components/data.dart';
+import 'package:reference_app/src/core/view/pages/reasons/reason_screen.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 import 'package:reference_app/src/core/providers/image_provider.dart';
@@ -45,18 +47,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 decoration: BoxDecoration(color: AppColors.primary),
                 child: Center(
                   child: Text(
-                    '7 Razones\nPor las que\nTe amo',
+                    Data.razones,
                     style: Theme.of(context).textTheme.bodyLarge,
                     textAlign: TextAlign.center)),
               ),
-              listReasons(context, tituloRazon: 'Razón 1', reasonScreen: () => ReasonScreen()),
-              listReasons(context, tituloRazon: 'Razón 2', reasonScreen: () => ReasonScreen2()),
-              listReasons(context, tituloRazon: 'Razón 3', reasonScreen: () => ReasonScreen3()),
-              listReasons(context, tituloRazon: 'Razón 4', reasonScreen: () => ReasonScreen4()),
-              listReasons(context, tituloRazon: 'Razón 5', reasonScreen: () => ReasonScreen5()),
-              listReasons(context, tituloRazon: 'Razón 6', reasonScreen: () => ReasonScreen6()),
-              listReasons(context, tituloRazon: 'Razón 7', reasonScreen: () => ReasonScreen7()),
-              listReasons(context, tituloRazon: 'Extra', reasonScreen: () => ReasonScreenExtra()),
+              listReasons(context, tituloRazon: Data.razon1, reasonScreen: () => ReasonScreen()),
+              listReasons(context, tituloRazon: Data.razon2, reasonScreen: () => ReasonScreen2()),
+              listReasons(context, tituloRazon: Data.razon3, reasonScreen: () => ReasonScreen3()),
+              listReasons(context, tituloRazon: Data.razon4, reasonScreen: () => ReasonScreen4()),
+              listReasons(context, tituloRazon: Data.razon5, reasonScreen: () => ReasonScreen5()),
+              listReasons(context, tituloRazon: Data.razon6, reasonScreen: () => ReasonScreen6()),
+              listReasons(context, tituloRazon: Data.razon7, reasonScreen: () => ReasonScreen7()),
+              listReasons(context, tituloRazon: Data.extra, reasonScreen: () => ReasonScreenExtra()),
             ],
           ),
         ),
@@ -109,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),*/
         floatingActionButton: FloatingActionButton(
           onPressed: () => context.read<ImageGalleryProvider>().pickAndSave(),
-          tooltip: "Añadir",
+          tooltip: Data.anadir,
           child: Icon(Icons.add),
           ),
         persistentFooterButtons: [
@@ -118,8 +120,8 @@ class _MyHomePageState extends State<MyHomePage> {
             spacing: 20,
             children: [
               //Expanded(child: Tooltip(message: "Borrar",child: ElevatedButton(onPressed: (){}, child: Icon(Icons.delete)))),
-              Expanded(child: Tooltip(message: "Mi Mami",child: ElevatedButton(onPressed: (){_navigateTo("/mami");}, child: Icon(Icons.account_box)))),
-              Expanded(child: Tooltip(message:"Opciones",child: ElevatedButton(onPressed: (){_navigateTo("/settings");}, child: Icon(Icons.settings))))
+              Expanded(child: Tooltip(message: Data.mimami,child: ElevatedButton(onPressed: (){_navigateTo(AppRoutes.mami);}, child: Icon(Icons.account_box)))),
+              Expanded(child: Tooltip(message:Data.opciones,child: ElevatedButton(onPressed: (){_navigateTo(AppRoutes.settings);}, child: Icon(Icons.settings))))
             ],
           ),
           
@@ -127,30 +129,33 @@ class _MyHomePageState extends State<MyHomePage> {
         bottomNavigationBar:BottomAppBar(
           child: Padding(
             padding: const EdgeInsets.only(top: 20),
-            child: Text("CON AMOR DE JUAN",textAlign: TextAlign.center,style: Theme.of(context).textTheme.titleMedium,),
+            child: Text(Data.conAmor,textAlign: TextAlign.center,style: Theme.of(context).textTheme.titleMedium,),
           ),
         ),
       ),
     );
   }
   AppBar _buildAppBar() => AppBar(
-        title: Text('TUS HIJOS',style:Theme.of(context).textTheme.labelLarge),
+        title: Text(Data.tushijos,style:Theme.of(context).textTheme.labelLarge),
         actions: [
-          IconButton(icon: const Icon(Icons.favorite_outline), onPressed: () => _navigateTo('/favorites')),
-          IconButton(icon: const Icon(Icons.pets), onPressed: () => _navigateTo('/ambar')),
-          IconButton(icon: const Icon(Icons.house), onPressed: () => _navigateTo('/house')),
+          IconButton(icon: const Icon(Icons.favorite_outline), onPressed: () => _navigateTo(AppRoutes.favorites)),
+          IconButton(icon: const Icon(Icons.pets), onPressed: () => _navigateTo(AppRoutes.ambar)),
+          IconButton(icon: const Icon(Icons.house), onPressed: () => _navigateTo(AppRoutes.house)),
         ],
       );
 
   Widget _buildBody(ImageGalleryProvider gallery) {
     if (gallery.loading) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(child: SizedBox(
+        width: 300,
+        height: 300,
+        child: CircularProgressIndicator()));
     }
     if (gallery.error != null) {
       return Center(child: Text('Error: \${gallery.error}'));
     }
     if (gallery.images.isEmpty) {
-      return  Center(child: Text('No hay imágenes.\nPresiona + para añadir.',));
+      return  Center(child: Text(Data.noimagenes,));
     }
     return GridView.builder(
       padding: const EdgeInsets.all(16),

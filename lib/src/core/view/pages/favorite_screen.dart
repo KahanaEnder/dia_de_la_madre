@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:reference_app/src/components/app_colors.dart';
+import 'package:reference_app/src/components/data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 
@@ -71,7 +72,7 @@ if (!hasPermission) {
     _isSnackBarVisible = true;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Sin Permiso'),
+        content: Text(Data.sinPermiso),
         duration: Duration(seconds: 2),
       ),
     ).closed.then((_) {
@@ -101,7 +102,7 @@ if (!hasPermission) {
   } catch (e) {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Error cargando imágenes: $e')),
+      SnackBar(content: Text('Error $e')),
     );
   }
 }
@@ -118,10 +119,10 @@ if (!hasPermission) {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Galería'),
+        title: const Text(Data.galeria),
       ),
       body: _images.isEmpty
-          ? const Center(child: Text('No hay imágenes'))
+          ? const Center(child: Text(Data.noimagenes))
           : ListView.builder(
               padding: const EdgeInsets.all(8.0),
               itemCount: _images.length,
